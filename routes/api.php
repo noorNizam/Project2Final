@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StudentAuthController;
+use App\Http\Controllers\TeacherAuthController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -17,8 +18,15 @@ use App\Http\Controllers\StudentAuthController;
 Route::post('/student/login', [StudentAuthController::class, 'login']);
 Route::post('/student/register', [StudentAuthController::class, 'register']);
 
+Route::post('/teacher/login', [TeacherAuthController::class, 'login']);
+Route::post('/teacher/register', [TeacherAuthController::class, 'register']);
+
+
+
+
+
 Route::get('/test', function() {
-    if(!auth('student')->check()) 
+    if(!auth('teacher')->check()) 
         return response()->json(['status' => "Not Authorized"], 401);
 
     return response()->json(['status' => "passed"], 200);
