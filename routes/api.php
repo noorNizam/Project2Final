@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\StudentAuthController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -14,6 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::post('/student/login', [StudentAuthController::class, 'login']);
+Route::post('/student/register', [StudentAuthController::class, 'register']);
+
+Route::get('/test', function() {
+    if(!auth('student')->check()) 
+        return response()->json(['status' => "Not Authorized"], 401);
+
+    return response()->json(['status' => "passed"], 200);
 });
