@@ -9,11 +9,11 @@ use Illuminate\Database\Eloquent\Model;
 class Teacher extends Authenticatable
 {
     use HasApiTokens;
-  
+
     protected $fillable = [
         'first_name', 'last_name', 'email', 'password','specialization' // Add other fields as necessary
     ];
-    
+
     // Method to handle file upload
     public function setImageAttribute($value)
     {
@@ -21,4 +21,14 @@ class Teacher extends Authenticatable
             $this->attributes['image'] = $value->store('images', 'public');
         }
     }
+//return the courses of this teacher
+    public function courses(){
+        return $this->hasMany(Course::class);
+    }
+
+//return the wallet of the teacher 
+    public function wallet(){
+        return $this->hasOne(TeacherWallet::class);
+    }
+
 }
