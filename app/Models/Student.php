@@ -18,4 +18,15 @@ class Student extends Authenticatable
             $this->attributes['image'] = $value->store('images', 'public');
         }
     }
+
+    public function wallet(){
+
+return $this->hasOne(StudentWallet::class);
+
+    }
+    public function courses(){
+
+return $this->hasMany(StudentCourse::class);
+
+    }
 }
