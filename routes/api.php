@@ -20,9 +20,10 @@ Route::post('/student/register', [StudentAuthController::class, 'register']);
 
 Route::post('/teacher/login', [TeacherAuthController::class, 'login']);
 Route::post('/teacher/register', [TeacherAuthController::class, 'register']);
+Route::put('/students/{id}', [StudentAuthController::class, 'update']);
 
-
-
+Route::middleware('auth:sanctum')->group(function () {
+Route::post('/student/logout', [StudentAuthController::class, 'logout']);});
 
 
 Route::get('/test', function() {
